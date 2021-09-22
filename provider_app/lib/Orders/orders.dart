@@ -5,7 +5,7 @@ import 'package:provider_app/provider/app_state.dart';
 class Orders extends StatelessWidget{
   Widget build(context){
     return Scaffold(
-      backgroundColor: Colors.brown[700],
+      backgroundColor: Colors.brown[100],
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.brown[700],
@@ -22,42 +22,30 @@ class Orders extends StatelessWidget{
       ),
       body: Consumer<AppState>(
         builder: (context, value, child){
-          return Container(
-            padding: EdgeInsets.all(8.0),
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.brown[100],
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30)
-            )
-          ),
-            child: ListView.builder(
-              itemCount: value.coffees
-              .where((element) => element.selected)
-              .length,
-              itemBuilder: (context, index){
-                return ListTile(
-                  title: Text(
-                    value.coffees
-                    .where((element) => element.selected)
-                    .toList()[index]
-                    .name
+          return ListView.builder(
+            itemCount: value.coffees
+            .where((element) => element.selected)
+            .length,
+            itemBuilder: (context, index){
+              return ListTile(
+                title: Text(
+                  value.coffees
+                  .where((element) => element.selected)
+                  .toList()[index]
+                  .name
+                ),
+                trailing: Text(
+                  '\$${value.coffees
+                  .where((element) => element.selected)
+                  .toList()[index]
+                  .price}',
+                  style: TextStyle(
+                    color: Colors.green[700],
+                    fontSize: 15
                   ),
-                  trailing: Text(
-                    '\$${value.coffees
-                    .where((element) => element.selected)
-                    .toList()[index]
-                    .price}',
-                    style: TextStyle(
-                      color: Colors.green[700],
-                      fontSize: 15
-                    ),
-                  ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           );
         },
       ),

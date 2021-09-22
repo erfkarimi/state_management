@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget{
               converter: (store)=> store.state.coffees,
               builder: (context, List<Coffee> allCoffees)=>
        Scaffold(
-        backgroundColor: Colors.brown[700],
+        backgroundColor: Colors.brown[100],
         appBar: AppBar(
           title: Text("Coffee menu"),
           centerTitle: true,
@@ -28,42 +28,33 @@ class HomePage extends StatelessWidget{
             )
           ],
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            color: Colors.brown[100],
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30)
-            )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Container(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ...allCoffees.map(
-                      (coffee) => ListTile(
-                        leading: Image.asset("icon/starbucks.png",
-                        width: 40,),
-                        title: Text(coffee.name),
-                  subtitle: Text('\$${coffee.price}',
-                  style: TextStyle(
-                    color: Colors.green[700]
-                  ),
-                  ),
-                  trailing: Checkbox(
-                    value: coffee.selected,
-                    onChanged: (value){
-                      StoreProvider.of<AppState>(context).dispatch(
-                          UpdateCoffeeAction(coffee)
-                        );
-                    },
-                  ),
-                      )
-                    )
-                  ]
+        body: Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Container(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...allCoffees.map(
+                    (coffee) => ListTile(
+                      leading: Image.asset("icon/starbucks.png",
+                      width: 40,),
+                      title: Text(coffee.name),
+                subtitle: Text('\$${coffee.price}',
+                style: TextStyle(
+                  color: Colors.green[700]
                 ),
+                ),
+                trailing: Checkbox(
+                  value: coffee.selected,
+                  onChanged: (value){
+                    StoreProvider.of<AppState>(context).dispatch(
+                        UpdateCoffeeAction(coffee)
+                      );
+                  },
+                ),
+                    )
+                  )
+                ]
               ),
             ),
           ),
